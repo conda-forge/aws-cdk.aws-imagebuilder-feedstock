@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/aws-cdk.aws-imagebuilder-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/aws-cdk.aws-imagebuilder-{{ version }}.tar.gz
   sha256: 95b626f816c96fc195a4c2a4963da2f18bb0cc93e1971082f27923d7c186e1e7
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools >=67.3.2,<67.4.dev0
     - wheel >=0.40,<1.dev0
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - aws-cdk.core ==1.204.0
     - python-jsii >=1.84.0,<2.0.0
     - publication >=0.0.3
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/aws/aws-cdk
